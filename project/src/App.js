@@ -7,7 +7,6 @@ import {useState} from "react";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
-import {createGenerateClassName} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,11 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     backgroundColor: 'rgba(255,255,255,0.08)'
-  },
-  hover : {
-    '& > :hover':{
-      backgroundColor: 'rgba(255,255,255,0.08)'
-    }
   }
 }));
 

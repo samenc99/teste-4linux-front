@@ -8,4 +8,15 @@ export const Content = styled.article`
   display: flex;
   justify-content: center;
   align-items: center;
+  >form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    >div:nth-child(2){
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 `

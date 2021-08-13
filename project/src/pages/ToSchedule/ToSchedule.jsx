@@ -48,7 +48,7 @@ export default function ToSchedule({active, setActive}){
                 value={form.emailCliente}
                 onChange={setForm}
               />
-              <Button variant={'contained'} color={'secondary'}>AGENDAR</Button>
+              <Button variant={'contained'} color={'primary'}>AGENDAR</Button>
             </form>
           :
           <H1>Consultar agendamento</H1>
