@@ -20,9 +20,9 @@ export default function ToSchedule({active, setActive}){
   const [form, setForm, clearForm] = useForm(initialForm)
   const classes = useStyles()
   return(
-    <Content active={active} onMouseEnter={()=>setActive(true)}>
+    <Content active={active}>
       {
-        active?
+        !active?
           <form className={classes.root}>
               <TextField
                 type={'date'}
@@ -51,7 +51,7 @@ export default function ToSchedule({active, setActive}){
               <Button variant={'contained'} color={'secondary'}>AGENDAR</Button>
             </form>
           :
-          <H1>Cadastrar agendamento</H1>
+          <H1>Consultar agendamento</H1>
       }
     </Content>
   )
