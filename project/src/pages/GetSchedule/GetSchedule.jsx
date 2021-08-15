@@ -1,10 +1,11 @@
-import {Content, Description, Div, idP} from "./styled";
+import {Content, Description, Div, IdP} from "./styled";
 import useForm from "../../hooks/useForm";
 import {H1} from "../../styled-components/H1";
 import {makeStyles, TextField} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {SchedulingController} from "../../controller/SchedulingController";
+import {MyButton} from "../../styled-components/MyButton";
 
 const initialForm = {data: '', idServico: '', idConsultor: ''}
 
@@ -41,20 +42,20 @@ export default function GetSchedule({active, setActive}){
     return schedules.map(s=>{
       return (
         <Div>
-          <idP>{s.idConsultor}</idP>
-          <idP>{s.idServico}</idP>
+          <IdP>{s.idConsultor}</IdP>
+          <IdP>{s.idServico}</IdP>
           <Description>{s.emailCliente}</Description>
         </Div>
       )
     })
   }
-  
+
   return(
     <Content active={active}>
       {
         active?
           <>
-            <form className={classes.root}>
+            <form className={classes.root} onSubmit={getSchedule}>
               <TextField
                 type={'date'}
                 value={form.data}
@@ -65,7 +66,6 @@ export default function GetSchedule({active, setActive}){
                 <TextField
                   className={classes.tam}
                   type={'number'}
-                  required
                   label={'Id Consultor'}
                   value={form.idConsultor}
                   onChange={setForm}
@@ -74,14 +74,15 @@ export default function GetSchedule({active, setActive}){
                 <TextField
                   className={classes.tam}
                   type={'number'}
-                  required
                   label={'Id Servico'}
                   value={form.idServico}
                   onChange={setForm}
                   name={'idServico'}
                 />
               </div>
-              <Button variant={'contained'} color={'secondary'} onClick={getSchedule}>Consultar</Button>
+              <MyButton>
+                <Button variant={'contained'} color={'secondary'}>Consultar</Button>
+              </MyButton>
             </form>
             {renderSchedules()}
           </>

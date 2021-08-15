@@ -31,7 +31,7 @@ export const Div = styled.div`
   align-items: center;
 `
 
-export const idP = styled.p`
+export const IdP = styled.p`
   width: 20%;
 `
 
