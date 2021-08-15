@@ -30,6 +30,7 @@ export default function GetSchedule({active, setActive}){
               type={'date'}
               value={form.data}
               onChange={setForm}
+              name={'data'}
             />
             <div>
               <TextField
@@ -39,6 +40,7 @@ export default function GetSchedule({active, setActive}){
                 label={'Id Consultor'}
                 value={form.idConsultor}
                 onChange={setForm}
+                name={'idConsultor'}
               />
               <TextField
                 className={classes.tam}
@@ -47,6 +49,7 @@ export default function GetSchedule({active, setActive}){
                 label={'Id Servico'}
                 value={form.idServico}
                 onChange={setForm}
+                name={'idServico'}
               />
             </div>
             <Button variant={'contained'} color={'secondary'}>Consultar</Button>

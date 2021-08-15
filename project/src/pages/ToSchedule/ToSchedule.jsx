@@ -29,24 +29,31 @@ export default function ToSchedule({active, setActive}){
                 required
                 value={form.data}
                 onChange={setForm}
+                name={'data'}
               />
               <TextField
                 label={'Id Consultor'}
                 required
                 value={form.idConsultor}
                 onChange={setForm}
+                name={'idConsultor'}
+                type={'number'}
               />
               <TextField
                 label={'Id Servico'}
                 required
                 value={form.idServico}
                 onChange={setForm}
+                name={'idServico'}
+                type={'number'}
               />
               <TextField
                 label={'Email do cliente'}
                 required
                 value={form.emailCliente}
                 onChange={setForm}
+                name={'emailCliente'}
+                type={'email'}
               />
               <Button variant={'contained'} color={'primary'}>AGENDAR</Button>
             </form>
