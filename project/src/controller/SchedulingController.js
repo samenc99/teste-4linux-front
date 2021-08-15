@@ -1,6 +1,6 @@
 import api from "./api";
 
-export class ToScheduleController{
+export class SchedulingController {
   errorMessage = 'Estamos com problemas internos, por favor tente novamente mais tarde.'
   toSchedule = async(form)=>{
     try{
