@@ -31,13 +31,13 @@ function App() {
       <Header className={classes.root}>
         <ButtonGroup color={'primary'} aria-label={'outlined primary button group'}>
           <Button
-            className={!active? classes.active : ''}
-            onClick={()=>setActive(false)}
-          >Cadastrar</Button>
-          <Button
             className={active? classes.active : ''}
             onClick={()=>setActive(true)}
           >Consultar</Button>
+          <Button
+            className={!active? classes.active : ''}
+            onClick={()=>setActive(false)}
+          >Cadastrar</Button>
         </ButtonGroup>
       </Header>
       <Content>
