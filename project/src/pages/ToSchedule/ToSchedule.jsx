@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import {H1} from "../../styled-components/H1";
 import {SchedulingController} from "../../controller/SchedulingController";
 import {MyButton} from "../../styled-components/MyButton";
+import {useState} from "react";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const initialForm = {data: '', idConsultor: '', idServico: '', emailCliente: ''}
 
@@ -22,10 +24,13 @@ const schedulingController = new SchedulingController()
 
 export default function ToSchedule({active, setActive}){
   const [form, setForm, clearForm] = useForm(initialForm)
+  const [loading, setLoading] = useState(false)
+
   const classes = useStyles()
 
   const onSubmit = async(e)=>{
     e.preventDefault()
+    setLoading(true)
     try{
       await schedulingController.toSchedule(form)
       clearForm()
@@ -33,13 +38,21 @@ export default function ToSchedule({active, setActive}){
     }catch (err){
       alert(err.message)
     }
+    setLoading(false)
   }
 
   return(
     <Content active={active}>
       {
         !active?
-          <form className={classes.root} onSubmit={onSubmit}>
+          <>
+            {
+              loading?
+                <CircularProgress/>
+                :
+                <></>
+            }
+            <form className={classes.root} onSubmit={onSubmit}>
               <TextField
                 type={'date'}
                 required
@@ -76,6 +89,7 @@ export default function ToSchedule({active, setActive}){
                 color={'primary'}
               >AGENDAR</Button></MyButton>
             </form>
+          </>
           :
           <H1>Consultar agendamento</H1>
       }

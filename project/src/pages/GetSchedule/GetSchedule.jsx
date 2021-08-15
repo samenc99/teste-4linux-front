@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import {useState} from "react";
 import {SchedulingController} from "../../controller/SchedulingController";
 import {MyButton} from "../../styled-components/MyButton";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const initialForm = {data: '', idServico: '', idConsultor: ''}
 
@@ -26,16 +27,20 @@ const schedulingController = new SchedulingController()
 export default function GetSchedule({active, setActive}){
   const [form, setForm, clearForm] = useForm(initialForm)
   const [schedules, setSchedules] = useState([]);
+  const [loading, setLoading] = useState(false)
+
   const classes = useStyles()
 
   const getSchedule = async(e)=>{
     e.preventDefault()
+    setLoading(true)
     try{
       const newSchedules = await schedulingController.getSchedule(form.idServico, form.idConsultor, form.data)
       setSchedules(newSchedules)
     }catch (err){
       alert(err.message)
     }
+    setLoading(false)
   }
 
   const renderSchedules = ()=>{
@@ -84,7 +89,11 @@ export default function GetSchedule({active, setActive}){
                 <Button variant={'contained'} color={'secondary'}>Consultar</Button>
               </MyButton>
             </form>
-            {renderSchedules()}
+            {loading?
+              <CircularProgress/>
+              :
+              renderSchedules()
+            }
           </>
           :
           <H1>Cadastrar agendamento</H1>

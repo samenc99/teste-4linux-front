@@ -8,6 +8,7 @@ export const Content = styled.article`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   >form{
     width: 100%;
     display: flex;
