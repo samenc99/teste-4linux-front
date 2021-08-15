@@ -12,7 +12,7 @@ export class SchedulingController {
 
   getSchedule = async(idServico, idConsultor, data)=>{
     try{
-      const res = await api.get('/scheduling')
+      const res = await api.get(`/scheduling?data=${data}&idServico=${idServico}&idConsultor=${idConsultor}`)
       return res.data.schedules
     }catch (err){
       throw new Error(err.response.data.message || this.errorMessage)
