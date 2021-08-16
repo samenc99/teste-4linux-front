@@ -7,29 +7,42 @@ import {useState} from "react";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
+import {PopulateController} from "./controller/PopulateController";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
+
   active: {
-    backgroundColor: 'rgba(255,255,255,0.08)'
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    fontWeight: 'bold'
+  },
+  populate: {
+    backgroundColor: '#f00',
+    position: 'absolute',
+    right: '10px',
+    color: '#fff',
+    fontWeight: 'bold'
   }
 }));
+
+const populateController = new PopulateController()
 
 function App() {
   const [active, setActive] = useState(false);
   const classes = useStyles()
 
+  const populate = async()=>{
+    try{
+      await populateController.populate()
+      alert('Base de dados criada.')
+    }catch (err){
+      alert(err.message)
+    }
+  }
+
   return (
     <Container>
       <Header className={classes.root}>
-        <ButtonGroup color={'primary'} aria-label={'outlined primary button group'}>
+        <ButtonGroup color={'primary'} aria-label={'outlined primary button group'} >
           <Button
             className={active? classes.active : ''}
             onClick={()=>setActive(true)}
@@ -39,6 +52,7 @@ function App() {
             onClick={()=>setActive(false)}
           >Cadastrar</Button>
         </ButtonGroup>
+        <Button className={classes.populate} onClick={populate}>Popular banco</Button>
       </Header>
       <Content>
         <GetSchedule active={active} setActive={setActive}/>
