@@ -49,6 +49,7 @@ export default function GetSchedule({active, setActive}){
         <Div>
           <IdP>{s.idConsultor}</IdP>
           <IdP>{s.idServico}</IdP>
+          <IdP>{s.data.slice(0,10)}</IdP>
           <Description>{s.descricao}</Description>
         </Div>
       )
@@ -96,6 +97,7 @@ export default function GetSchedule({active, setActive}){
                 <Div>
                   <IdP><b>Id consultor</b></IdP>
                   <IdP><b>Id servico</b></IdP>
+                  <IdP><b>Data</b></IdP>
                   <Description><b>Descrição</b></Description>
                 </Div>
                 {renderSchedules()}

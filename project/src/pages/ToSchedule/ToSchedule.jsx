@@ -8,6 +8,8 @@ import {SchedulingController} from "../../controller/SchedulingController";
 import {MyButton} from "../../styled-components/MyButton";
 import {useState} from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {ServiceConsultantController} from "../../controller/ServiceConsultantController";
+import {Description, Div, IdP} from "../../styled-components/table";
 
 const initialForm = {data: '', idConsultor: '', idServico: '', emailCliente: ''}
 
@@ -21,11 +23,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schedulingController = new SchedulingController()
+const serviceConsultantController = new ServiceConsultantController()
 
 export default function ToSchedule({active, setActive}){
   const [form, setForm, clearForm] = useForm(initialForm)
   const [loading, setLoading] = useState(false)
-
+  const [servicesConsultants, setServicesConsultants] = useState([])
   const classes = useStyles()
 
   const onSubmit = async(e)=>{
@@ -39,6 +42,41 @@ export default function ToSchedule({active, setActive}){
       alert(err.message)
     }
     setLoading(false)
+  }
+
+  const onClickConsultant = async()=>{
+    setLoading(true)
+    try{
+      const newServicesConsultants = await serviceConsultantController.getServicesConsultants()
+      setServicesConsultants(newServicesConsultants)
+    }catch (err){
+      alert(err.message)
+    }
+    setLoading(false)
+  }
+
+  const renderServicesConsultants = ()=>{
+    const render = []
+    if(servicesConsultants.length>0){
+      render.push(
+        <Div>
+          <IdP><b>Id serviço</b></IdP>
+          <IdP><b>Id consultor</b></IdP>
+          <Description><b>Descrição</b></Description>
+        </Div>
+      )
+      servicesConsultants.forEach(sc=>{
+        render.push(
+          <Div>
+            <IdP>{sc.idServico}</IdP>
+            <IdP>{sc.idConsultor}</IdP>
+            <Description>{sc.descricao}</Description>
+          </Div>
+        )
+      })
+      return render
+    }
+    return <></>
   }
 
   return(
@@ -89,6 +127,12 @@ export default function ToSchedule({active, setActive}){
                 color={'primary'}
               >AGENDAR</Button></MyButton>
             </form>
+            <Button
+              variant={'contained'}
+              color={'secondary'}
+              onClick={onClickConsultant}
+            >Consultar serviços</Button>
+            {renderServicesConsultants()}
           </>
           :
           <H1>Consultar agendamento</H1>
