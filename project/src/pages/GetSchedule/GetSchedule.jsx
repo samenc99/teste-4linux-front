@@ -49,7 +49,7 @@ export default function GetSchedule({active, setActive}){
         <Div>
           <IdP>{s.idConsultor}</IdP>
           <IdP>{s.idServico}</IdP>
-          <Description>{s.emailCliente}</Description>
+          <Description>{s.descricao}</Description>
         </Div>
       )
     })
@@ -92,7 +92,14 @@ export default function GetSchedule({active, setActive}){
             {loading?
               <CircularProgress/>
               :
-              renderSchedules()
+              <>
+                <Div>
+                  <IdP><b>Id consultor</b></IdP>
+                  <IdP><b>Id servico</b></IdP>
+                  <Description><b>Descrição</b></Description>
+                </Div>
+                {renderSchedules()}
+              </>
             }
           </>
           :
